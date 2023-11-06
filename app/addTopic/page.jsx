@@ -2,17 +2,21 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 
 export default function AddTopic () {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
+    const {data:session} = useSession()
+
     const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const created = session.user.name
         if(!title || !description){
             /* Then change this option to be displayed on the screen */
             alert("Title and description are required");
@@ -25,7 +29,7 @@ export default function AddTopic () {
                 headers:{
                     "Content-type": "application/json",
                 },
-                body: JSON.stringify({title, description}),
+                body: JSON.stringify({created, title, description}),
             });
 
             if(res.ok){

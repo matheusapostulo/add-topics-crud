@@ -1,6 +1,7 @@
 import RemoveBtn from "./RemoveBtn";
 import Link from "next/link";
 import { HiPencilAlt } from "react-icons/hi";
+import { useSession } from "next-auth/react";
 
 const getTopics = async () => {
     const apiUrl = process.env.API_URL;
@@ -22,7 +23,6 @@ const getTopics = async () => {
 }
 
 export default async function TopicsList () {
-
     const {topics} = await getTopics();
 
     return(
