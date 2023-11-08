@@ -24,24 +24,27 @@ const getTopics = async () => {
 
 export default async function TopicsList () {
     const {topics} = await getTopics();
+    console.log("Esse é topic:", topics)
 
     return(
         <>
-        {topics.map((t) => (
-            <div className="flex justify-between border border-zinc-950 rounded-md my-4 p-3" key={t._id}>
-                <div className="">
-                    <h2 className="font-bold text-3xl mb-1">{t.title}</h2>
-                    <p>{t.description}</p>
-                </div>
+            {topics && (
+                topics.map((t) => (
+                <div className="flex justify-between border border-zinc-950 rounded-md my-4 p-3" key={t._id}>
+                    <div className="">
+                        <h2 className="font-bold text-3xl mb-1">{t.title}</h2>
+                        <p>{t.description}</p>
+                    </div>
 
-                <div className="flex self-start gap-5">
-                    <RemoveBtn id={t._id}/>
-                    <Link href={`/editTopic/${t._id}`}> 
-                        <HiPencilAlt size={24}/>
-                    </Link>
+                    <div className="flex self-start gap-5">
+                        <RemoveBtn id={t._id}/>
+                        <Link href={`/editTopic/${t._id}`}> 
+                            <HiPencilAlt size={24}/>
+                        </Link>
+                    </div>
                 </div>
-            </div>
-        ))}
+            )))}
+       
         </>
     )
 }
