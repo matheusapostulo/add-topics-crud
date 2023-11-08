@@ -32,7 +32,7 @@ export default function EditTopicForm ({id, title, description}) {
             router.push("/")
 
         } catch (error) {
-            console.log("deu merda",error)
+            console.log("deu ruim",error)
         }
     }
 
