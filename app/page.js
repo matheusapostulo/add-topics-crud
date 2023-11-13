@@ -1,6 +1,7 @@
 import TopicsList from '@/components/TopicsList'
 import Login from './login/page'
 import { getServerSession } from 'next-auth'
+import { authOptions } from './api/auth/[...nextauth]/route'
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
