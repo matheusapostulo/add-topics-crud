@@ -9,14 +9,15 @@ export default function AddTopic () {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-    const {data:session} = useSession()
-
     const router = useRouter();
+
+    const {data:session} = useSession()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const created = session.user.name
+        const created = session?.user?.id
+
         if(!title || !description){
             /* Then change this option to be displayed on the screen */
             alert("Title and description are required");
