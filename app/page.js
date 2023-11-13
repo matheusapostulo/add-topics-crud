@@ -1,7 +1,12 @@
 import TopicsList from '@/components/TopicsList'
 import Login from './login/page'
+import { getServerSession } from 'next-auth'
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions)
+
+  if(session) redirect("/dashboard")
+  
   return (
     <>
     <div className='flex flex-col'>
