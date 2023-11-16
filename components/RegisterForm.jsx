@@ -20,6 +20,21 @@ export default function RegisterForm(){
         }
 
         try {
+            const resUserExists = await fetch("api/userExists",{
+                method: "POST",
+                headers: {
+                    "Content-type":"application/json",
+                },
+                body: JSON.stringify({email}),
+            })
+
+            const {user} = await resUserExists.json()
+
+            if (user) {
+                setError("Usuário já existe!")
+                return
+            }
+
             const res = await fetch('api/register',{
                 method: "POST",
                 headers: {

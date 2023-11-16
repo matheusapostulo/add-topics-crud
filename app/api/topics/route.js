@@ -3,6 +3,7 @@ import Topic from "@/models/topic";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { getToken } from "next-auth/jwt";
 
 
 export async function POST(request){
@@ -18,6 +19,8 @@ export async function POST(request){
 }
 
 export async function GET(req){
+    const token = await getToken({req})
+    console.log(token)
     const id = req.nextUrl.searchParams.get("id")
     await connectMongoDB();
     const topics = await Topic.find({ created: id}).exec();
@@ -27,7 +30,6 @@ export async function GET(req){
 export async function DELETE(req){
     const session = await getServerSession(authOptions)
     if(session){
-        console.log("Session no DELETE", session)
         const id = req.nextUrl.searchParams.get("id")
         await connectMongoDB();
         await Topic.findByIdAndDelete(id)

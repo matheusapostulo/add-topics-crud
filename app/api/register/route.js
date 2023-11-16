@@ -4,7 +4,6 @@ import connectMongoDB from "@/libs/mongodb"
 import User from "@/models/user"
 
 export async function POST(req){
-    console.log("Chegando req")
     try {
         const {name, email, password} = await req.json()
         const hashedPassword = await bcrypt.hash(password, 10)
