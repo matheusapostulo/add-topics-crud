@@ -9,7 +9,6 @@ export default function AddTopic () {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
-    const router = useRouter();
 
     const {data:session} = useSession()
 
@@ -34,8 +33,7 @@ export default function AddTopic () {
             });
 
             if(res.ok){
-                router.push('/');
-                router.refresh();
+                router.refresh()
             } else {
                 throw new Error('Failed to create a topic!')
             }

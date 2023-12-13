@@ -19,8 +19,6 @@ export async function POST(request){
 }
 
 export async function GET(req){
-    const token = await getToken({req})
-    console.log(token)
     const id = req.nextUrl.searchParams.get("id")
     await connectMongoDB();
     const topics = await Topic.find({ created: id}).exec();
